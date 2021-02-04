@@ -124,7 +124,7 @@ jobs:
         sudo ldconfig
         cd ..
 
-    - name; Set the cmake flags
+    - name: Set the cmake flags
       if: env.CONDA_PREFIX != ''
       run: echo "CONDA_FLAGS=$CONDA_FLAGS -DCMAKE_PREFIX_PATH=$CONDA_PREFIX" >> $GITHUB_ENV
     - name: Build the CZMQ package (OSX/LINUX)
