@@ -34,6 +34,10 @@ jobs:
       if: matrix.install-method != 'manager'
       run: |
         git apply 0001-cmake-libzmq-to-zeromq.patch
+    - name: Apply patch to cmake
+      if: matrix.install-method == 'manager'
+      run: |
+        git apply 0001-cmake-libzmq-to-zeromq-vcpkg.patch
 
     # Steps when installing via conda
     - name: Set up miniconda
