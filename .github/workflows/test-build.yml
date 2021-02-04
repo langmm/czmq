@@ -26,8 +26,6 @@ jobs:
         shell: bash -l {0}
     steps:
     - uses: actions/checkout@v2
-      with:
-        repository: zeromq/czmq
     - name: Set up miniconda
       uses: conda-incubator/setup-miniconda@v2
       with:
@@ -87,8 +85,6 @@ jobs:
         shell: bash -l {0}
     steps:
     - uses: actions/checkout@v2
-      with:
-        repository: zeromq/czmq
     - name: Install dependencies using homebrew (OSX)
       if: matrix.os == 'macos-latest'
       run: |
@@ -148,8 +144,6 @@ jobs:
         shell: bash -l {0}
     steps:
     - uses: actions/checkout@v2
-      with:
-        repository: zeromq/czmq
     - name: Install dependencies using homebrew (OSX)
       if: matrix.os == 'macos-latest'
       run: |
