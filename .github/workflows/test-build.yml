@@ -132,9 +132,9 @@ jobs:
       run: |
         ./autogen.sh
         ./configure
-    - name: Set the Makefile generator to Ninja (WINDOWS)
-      if: matrix.os == 'windows-latest'
-      run: echo "CMAKE_GENERATOR=Ninja" >> $GITHUB_ENV
+    # - name: Set the Makefile generator to Ninja (WINDOWS)
+    #   if: matrix.os == 'windows-latest'
+    #   run: echo "CMAKE_GENERATOR=Ninja" >> $GITHUB_ENV
     - name: Build the CZMQ package (WINDOWS)
       if: matrix.os == 'windows-latest'
       run: |
