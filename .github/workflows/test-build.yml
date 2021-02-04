@@ -100,16 +100,16 @@ jobs:
       run: |
         cd ..
         git clone git://github.com/zeromq/libzmq.git
-    # - name: Set prefix for Github package
-    #   if: matrix.install-method == 'github'
-    #   run: echo "CMAKE_PREFIX=C:/libzmq" >> $GITHUB_ENV
+    - name: Set prefix for Github package
+      if: matrix.os == 'windows-latest' && matrix.install-method == 'github'
+      run: echo "CMAKE_PREFIX=C:/libzmq" >> $GITHUB_ENV
     - name: Build and install zeromq master branch (WINDOWS)
       if: matrix.os == 'windows-latest' && matrix.install-method == 'github'
       run: |
         cd ../libzmq
         mkdir build
         cd build
-        cmake .. -DBUILD_STATIC=OFF -DBUILD_SHARED=ON # -DCMAKE_INSTALL_PREFIX=$CMAKE_PREFIX
+        cmake .. -DBUILD_STATIC=OFF -DBUILD_SHARED=ON -DCMAKE_INSTALL_PREFIX=$CMAKE_PREFIX
         cmake --build . --config ${{ env.CONFIGURATION }} --target install
         cd ../..
     - name: Build and install zeromq master branch (OSX/LINUX)
