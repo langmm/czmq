@@ -128,21 +128,26 @@ set(OPTIONAL_LIBRARIES)
 set(OPTIONAL_LIBRARIES_STATIC)
 
 ########################################################################
-# LIBZMQ dependency
+# ZeroMQ dependency
 ########################################################################
-find_package(libzmq REQUIRED)
-IF (LIBZMQ_FOUND)
-    include_directories(${LIBZMQ_INCLUDE_DIRS})
-    list(APPEND MORE_LIBRARIES ${LIBZMQ_LIBRARIES})
-  IF (PC_LIBZMQ_FOUND)
+find_package(ZeroMQ REQUIRED)
+IF (ZeroMQ_FOUND)
+    message (STATUS "ZeroMQ_INCLUDE_DIR   : ${ZeroMQ_INCLUDE_DIR}")
+    message (STATUS "ZeroMQ_LIBRARY       : ${ZeroMQ_LIBRARY}")
+    message (STATUS "ZeroMQ_STATIC_LIBRARY: ${ZeroMQ_STATIC_LIBRARY}")
+    message (STATUS "PC_ZeroMQ_FOUND      : ${PC_ZeroMQ_FOUND}")
+    include_directories(${ZeroMQ_INCLUDE_DIRS})
+    set(LIBZMQ_LIBRARIES libzmq)
+    list(APPEND MORE_LIBRARIES libzmq)
+  IF (PC_ZeroMQ_FOUND)
       set(pkg_config_names_private "${pkg_config_names_private} libzmq")
-      list(APPEND OPTIONAL_LIBRARIES_STATIC ${PC_LIBZMQ_STATIC_LDFLAGS})
-  ELSE (PC_LIBZMQ_FOUND)
+      list(APPEND OPTIONAL_LIBRARIES_STATIC ${PC_ZeroMQ_STATIC_LDFLAGS})
+  ELSE (PC_ZeroMQ_FOUND)
       set(pkg_config_libs_private "${pkg_config_libs_private} -lzmq")
-  ENDIF (PC_LIBZMQ_FOUND)
-ELSE (LIBZMQ_FOUND)
+  ENDIF (PC_ZeroMQ_FOUND)
+ELSE (ZeroMQ_FOUND)
     message( FATAL_ERROR "libzmq not found." )
-ENDIF (LIBZMQ_FOUND)
+ENDIF (ZeroMQ_FOUND)
 
 ########################################################################
 # UUID dependency
