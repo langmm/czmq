@@ -140,7 +140,8 @@ jobs:
       run: |
         mkdir build
         cd build
-        cmake .. -G${{ env.CMAKE_GENERATOR }} -DCZMQ_BUILD_SHARED=ON -DCZMQ_BUILD_STATIC=OFF $CONDA_FLAGS
+        # cmake .. -G${{ env.CMAKE_GENERATOR }} -DCZMQ_BUILD_SHARED=ON -DCZMQ_BUILD_STATIC=OFF $CONDA_FLAGS
+        cmake .. -DCZMQ_BUILD_SHARED=ON -DCZMQ_BUILD_STATIC=OFF $CONDA_FLAGS
         cmake --build . --config ${{ env.CONFIGURATION }}
         # ninja all
     - name: Run the tests (OSX/LINUX)
