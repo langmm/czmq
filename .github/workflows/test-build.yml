@@ -31,6 +31,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Apply patch to cmake
+      if: matrix.install-method != 'manager'
       run: |
         git apply 0001-cmake-libzmq-to-zeromq.patch
 
@@ -97,16 +98,16 @@ jobs:
       run: |
         cd ..
         git clone git://github.com/zeromq/libzmq.git
-    - name: Set prefix for Github package
-      if: matrix.install-method == 'github'
-      run: echo "CONDA_PREFIX=C:/libzmq" >> $GITHUB_ENV
+    # - name: Set prefix for Github package
+    #   if: matrix.install-method == 'github'
+    #   run: echo "CONDA_PREFIX=C:/libzmq" >> $GITHUB_ENV
     - name: Build and install zeromq master branch (WINDOWS)
       if: matrix.os == 'windows-latest' && matrix.install-method == 'github'
       run: |
         cd ../libzmq
         mkdir build
         cd build
-        cmake .. -DBUILD_STATIC=OFF -DBUILD_SHARED=ON -DCMAKE_INSTALL_PREFIX=$CONDA_PREFIX
+        cmake .. -DBUILD_STATIC=OFF -DBUILD_SHARED=ON # -DCMAKE_INSTALL_PREFIX=$CONDA_PREFIX
         cmake --build . --config ${{ env.CONFIGURATION }} --target install
         cd ../..
     - name: Build and install zeromq master branch (OSX/LINUX)
@@ -148,6 +149,10 @@ jobs:
       if: matrix.os != 'windows-latest'
       run: |
         make check-verbose
+    - name: Run the tests (WINDOWS)
+      if: matrix.os == 'windows-latest'
+      run:
+        ctest -C ${{ env.CONFIGURATION }} -V
     - name: Run the tests (WINDOWS)
       if: matrix.os == 'windows-latest'
       run: |
