@@ -6,7 +6,6 @@ on:
       - 'gh-pages'
 env:
   CONFIGURATION: Debug
-  # CMAKE_GENERATOR: 'Unix Makefiles'
   CMAKE_PREFIX: ''
   CMAKE_FLAGS: ''
 
@@ -18,7 +17,7 @@ jobs:
       CONDA_PKGS_ALL: 'cmake pcre zeromq'
       CONDA_PKGS_UNIX: 'autoconf automake libtool libuuid pkg-config'
       CONDA_PKGS_OSX: 'clang_osx-64 clangxx_osx-64'
-      CONDA_PKGS_WIN: 'c-compiler cxx-compiler ninja'
+      CONDA_PKGS_WIN: 'c-compiler cxx-compiler'
     strategy:
       max-parallel: 20
       matrix:
@@ -136,18 +135,13 @@ jobs:
       run: |
         ./autogen.sh
         ./configure
-    # - name: Set the Makefile generator to Ninja (WINDOWS)
-    #   if: matrix.os == 'windows-latest'
-    #   run: echo "CMAKE_GENERATOR=Ninja" >> $GITHUB_ENV
     - name: Build the CZMQ package (WINDOWS)
       if: matrix.os == 'windows-latest'
       run: |
         mkdir build
         cd build
-        # cmake .. -G${{ env.CMAKE_GENERATOR }} -DCZMQ_BUILD_SHARED=ON -DCZMQ_BUILD_STATIC=OFF $CMAKE_FLAGS
         cmake .. -DCZMQ_BUILD_SHARED=ON -DCZMQ_BUILD_STATIC=OFF $CMAKE_FLAGS
-        cmake --build . --config ${{ env.CONFIGURATION }}
-        # ninja all
+        cmake --build . --config ${{ env.CONFIGURATION }} --target install
     - name: Run the tests (OSX/LINUX)
       if: matrix.os != 'windows-latest'
       run: |
