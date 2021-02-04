@@ -78,7 +78,7 @@ jobs:
       run: |
         # choco install cmake
         vcpkg install pcre --triplet x64-windows
-        echo "CONDA_FLAGS=$CONDA_FLAGS -DCMAKE_TOOLCHAIN_FILE=D:\\vcpkg\\scripts\\buildsystems\\vcpkg.cmake" >> $GITHUB_ENV
+        # echo "CONDA_FLAGS=$CONDA_FLAGS -DCMAKE_TOOLCHAIN_FILE=D:\\vcpkg\\scripts\\buildsystems\\vcpkg.cmake" >> $GITHUB_ENV
 
     # Steps when installing libzmq via package manager
     - name: Install libzmq using homebrew (OSX)
