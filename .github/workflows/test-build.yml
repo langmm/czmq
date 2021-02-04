@@ -58,7 +58,7 @@ jobs:
       run: conda list
     - name: Set prefix for conda package
       if: matrix.install-method == 'conda'
-      run: echo "CMAKE_PREFIX=$CONDA_PREFIX/lib" >> $GITHUB_ENV
+      run: echo "CMAKE_PREFIX=$CONDA_PREFIX" >> $GITHUB_ENV
     # - name: Set environment variable pointing to the conda library directory (OSX)
     #   if: matrix.os == 'macos-latest'
     #   run: echo "LDFLAGS=\"-Wl,-rpath,$CONDA_PREFIX/lib $LDFLAGS\"" >> $GITHUB_ENV
