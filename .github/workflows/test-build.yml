@@ -6,7 +6,7 @@ on:
       - 'gh-pages'
 env:
   CONFIGURATION: Debug
-  CMAKE_GENERATOR: Unix Makefiles
+  CMAKE_GENERATOR: 'Unix Makefiles'
   CMAKE_PREFIX: ''
   CMAKE_FLAGS: ''
 
@@ -142,7 +142,7 @@ jobs:
         cd build
         cmake .. -G${{ env.CMAKE_GENERATOR }} -DCZMQ_BUILD_SHARED=ON -DCZMQ_BUILD_STATIC=OFF $CONDA_FLAGS
         cmake --build . --config ${{ env.CONFIGURATION }}
-        ninja all
+        # ninja all
     - name: Run the tests (OSX/LINUX)
       if: matrix.os != 'windows-latest'
       run: |
