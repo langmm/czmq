@@ -560,8 +560,8 @@ typedef intptr_t ssize_t;
 #     endif
 #   endif
 #   if ((!defined (__MINGW32__) \
-    || (defined (__MINGW32__) && defined (__IS_64BIT__))) \
-    && !defined (ZMQ_DEFINED_STDINT))
+    || (defined (__MINGW32__) && defined (__IS_64BIT__))))
+#     if (!defined (ZMQ_DEFINED_STDINT))
     typedef __int8 int8_t;
     typedef __int16 int16_t;
     typedef __int32 int32_t;
@@ -570,6 +570,39 @@ typedef intptr_t ssize_t;
     typedef unsigned __int16 uint16_t;
     typedef unsigned __int32 uint32_t;
     typedef unsigned __int64 uint64_t;
+#     elif defined _MSC_VER && _MSC_VER < 1600
+        // Patch defines types that ZMQ does not
+#       ifndef int8_t
+    typedef __int8 int8_t;
+#       endif
+#       ifndef int16_t
+    typedef __int16 int16_t;
+#       endif
+#       ifndef int64_t
+    typedef __int64 int64_t;
+#       endif
+#       ifndef uint64_t
+    typedef unsigned __int64 uint64_t;
+#       endif
+#       ifndef UINT8_MAX
+#         define UINT8_MAX _UI8_MAX
+#       endif
+#       ifndef UINT16_MAX
+#         define UINT16_MAX _UI16_MAX
+#       endif
+#       ifndef UINT32_MAX
+#         define UINT32_MAX _UI32_MAX
+#       endif
+#       ifndef UINT64_MAX
+#         define UINT64_MAX _UI64_MAX
+#       endif
+#       ifndef intmax_t
+    typedef int64_t intmax_t;
+#       endif
+#       ifndef uintmax_t
+    typedef uint64_t uintmax_t;
+#       endif
+#     endif
 #   endif
     typedef uint32_t in_addr_t;
 #   if (!defined (PRId8))
