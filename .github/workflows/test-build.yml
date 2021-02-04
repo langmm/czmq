@@ -59,7 +59,7 @@ jobs:
       run: conda list
     - name: Set prefix for conda package
       if: matrix.install-method == 'conda'
-      run: echo "CONDA_PREFIX=$CONDA_PREFIX/lib" >> $GITHUB_ENV
+      run: echo "CMAKE_PREFIX=$CONDA_PREFIX/lib" >> $GITHUB_ENV
     # - name: Set environment variable pointing to the conda library directory (OSX)
     #   if: matrix.os == 'macos-latest'
     #   run: echo "LDFLAGS=\"-Wl,-rpath,$CONDA_PREFIX/lib $LDFLAGS\"" >> $GITHUB_ENV
@@ -82,7 +82,7 @@ jobs:
       if: matrix.os == 'windows-latest' && matrix.install-method != 'conda'
       run: |
         vcpkg install pcre --triplet x64-windows
-        echo "CONDA_FLAGS=$CONDA_FLAGS -DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake" >> $GITHUB_ENV
+        echo "CMAKE_FLAGS=$CMAKE_FLAGS -DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake" >> $GITHUB_ENV
 
     # Steps when installing libzmq via package manager
     - name: Install libzmq using homebrew (OSX)
@@ -103,14 +103,14 @@ jobs:
         git clone git://github.com/zeromq/libzmq.git
     # - name: Set prefix for Github package
     #   if: matrix.install-method == 'github'
-    #   run: echo "CONDA_PREFIX=C:/libzmq" >> $GITHUB_ENV
+    #   run: echo "CMAKE_PREFIX=C:/libzmq" >> $GITHUB_ENV
     - name: Build and install zeromq master branch (WINDOWS)
       if: matrix.os == 'windows-latest' && matrix.install-method == 'github'
       run: |
         cd ../libzmq
         mkdir build
         cd build
-        cmake .. -DBUILD_STATIC=OFF -DBUILD_SHARED=ON # -DCMAKE_INSTALL_PREFIX=$CONDA_PREFIX
+        cmake .. -DBUILD_STATIC=OFF -DBUILD_SHARED=ON # -DCMAKE_INSTALL_PREFIX=$CMAKE_PREFIX
         cmake --build . --config ${{ env.CONFIGURATION }} --target install
         cd ../..
     - name: Build and install zeromq master branch (OSX/LINUX)
@@ -129,8 +129,8 @@ jobs:
         cd ..
 
     - name: Set the cmake flags
-      if: env.CONDA_PREFIX != ''
-      run: echo "CONDA_FLAGS=$CONDA_FLAGS -DCMAKE_PREFIX_PATH=$CONDA_PREFIX" >> $GITHUB_ENV
+      if: env.CMAKE_PREFIX != ''
+      run: echo "CMAKE_FLAGS=$CMAKE_FLAGS -DCMAKE_PREFIX_PATH=$CMAKE_PREFIX" >> $GITHUB_ENV
     - name: Build the CZMQ package (OSX/LINUX)
       if: matrix.os != 'windows-latest'
       run: |
@@ -144,8 +144,8 @@ jobs:
       run: |
         mkdir build
         cd build
-        # cmake .. -G${{ env.CMAKE_GENERATOR }} -DCZMQ_BUILD_SHARED=ON -DCZMQ_BUILD_STATIC=OFF $CONDA_FLAGS
-        cmake .. -DCZMQ_BUILD_SHARED=ON -DCZMQ_BUILD_STATIC=OFF $CONDA_FLAGS
+        # cmake .. -G${{ env.CMAKE_GENERATOR }} -DCZMQ_BUILD_SHARED=ON -DCZMQ_BUILD_STATIC=OFF $CMAKE_FLAGS
+        cmake .. -DCZMQ_BUILD_SHARED=ON -DCZMQ_BUILD_STATIC=OFF $CMAKE_FLAGS
         cmake --build . --config ${{ env.CONFIGURATION }}
         # ninja all
     - name: Run the tests (OSX/LINUX)
