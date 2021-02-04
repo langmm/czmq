@@ -1,4 +1,4 @@
-From 42f7a6bc951cba949d6789616f07152ce6bbbdba Mon Sep 17 00:00:00 2001
+From 10c36721d7aa1f7233ef6b1b67cc8a7fb2a03a0b Mon Sep 17 00:00:00 2001
 From: Meagan Lang <langmm.astro@gmail.com>
 Date: Thu, 4 Feb 2021 10:48:37 -0800
 Subject: [PATCH 1/3] cmake libzmq to zeromq
@@ -8,7 +8,7 @@ Subject: [PATCH 1/3] cmake libzmq to zeromq
  1 file changed, 17 insertions(+), 12 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index d51cba09..278b9dce 100644
+index d51cba09..e907da43 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -128,21 +128,26 @@ set(OPTIONAL_LIBRARIES)
@@ -30,7 +30,7 @@ index d51cba09..278b9dce 100644
 +    message (STATUS "ZeroMQ_LIBRARY       : ${ZeroMQ_LIBRARY}")
 +    message (STATUS "ZeroMQ_STATIC_LIBRARY: ${ZeroMQ_STATIC_LIBRARY}")
 +    message (STATUS "PC_ZeroMQ_FOUND      : ${PC_ZeroMQ_FOUND}")
-+    include_directories(${ZeroMQ_INCLUDE_DIRS})
++    include_directories(${ZeroMQ_INCLUDE_DIR})
 +    set(LIBZMQ_LIBRARIES libzmq)
 +    list(APPEND MORE_LIBRARIES libzmq)
 +  IF (PC_ZeroMQ_FOUND)
