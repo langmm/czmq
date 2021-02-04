@@ -148,7 +148,7 @@ jobs:
         make check-verbose
     - name: Run the tests (WINDOWS)
       if: matrix.os == 'windows-latest'
-      run:
+      run: |
         cd build
         ctest -C ${{ env.CONFIGURATION }} -V
     - name: Run the tests (WINDOWS)
