@@ -175,7 +175,6 @@ jobs:
       run: |
         cd build
         ctest -C ${{ env.CONFIGURATION }} -V
-        cd ..
     # - name: Start SSH session
     #   uses: luchihoratiu/debug-via-ssh@main
     #   if: ${{ failure() }}
