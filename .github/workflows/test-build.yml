@@ -151,9 +151,9 @@ jobs:
         echo "%CMAKE_ZMQ_PREFIX%"
         dir "%CMAKE_ZMQ_PREFIX%"
         dir "%CMAKE_ZMQ_PREFIX%\bin"
-        # dir ${{ env.CMAKE_ZMQ_PREFIX }}\bin
-        copy /y "%CMAKE_ZMQ_PREFIX%\bin\libzmq-*.dll" /b "%CMAKE_ZMQ_PREFIX%\bin\libzmq.dll"
-        # copy /y ${{ env.CMAKE_ZMQ_PREFIX }}\bin\libzmq-*.dll /b ${{ env.CMAKE_ZMQ_PREFIX }}\bin\libzmq.dll
+        dir "%CMAKE_ZMQ_PREFIX%\Library\bin"
+        dir "%CMAKE_ZMQ_PREFIX%\Library"
+    # copy /y "%CMAKE_ZMQ_PREFIX%\bin\libzmq-*.dll" /b "%CMAKE_ZMQ_PREFIX%\bin\libzmq.dll"
     - name: Build the CZMQ package (WINDOWS)
       if: matrix.os == 'windows-latest'
       run: |
