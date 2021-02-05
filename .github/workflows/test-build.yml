@@ -164,13 +164,13 @@ jobs:
       # run: echo "PATH=$PATH:$CMAKE_CZMQ_PREFIX/bin" >> $GITHUB_ENV
     - name: Run dumpbin
       if: matrix.os == 'windows-latest'
-    - name: Run the tests (WINDOWS)
-      if: matrix.os == 'windows-latest'
       continue-on-error: true
       run: |
         cd build
         dumpbin.exe ${{ env.CONFIGURATION }}/czmq_selftest.exe
         cd ..
+    - name: Run the tests (WINDOWS)
+      if: matrix.os == 'windows-latest'
       run: |
         echo $PATH
         cd build
