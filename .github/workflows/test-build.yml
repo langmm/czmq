@@ -134,7 +134,7 @@ jobs:
 
     - name: Set the cmake flags
       if: env.CMAKE_ZMQ_PREFIX != ''
-      run: echo "CMAKE_FLAGS=$CMAKE_FLAGS -DCMAKE_PREFIX_PATH=$CMAKE_ZMQ_PREFIX/bin" >> $GITHUB_ENV
+      run: echo "CMAKE_FLAGS=$CMAKE_FLAGS -DCMAKE_PREFIX_PATH=$CMAKE_ZMQ_PREFIX" >> $GITHUB_ENV
     - name: Set the cmake flags
       if: env.CMAKE_CZMQ_PREFIX != ''
       run: echo "CMAKE_FLAGS=$CMAKE_FLAGS -DCMAKE_INSTALL_PREFIX=$CMAKE_CZMQ_PREFIX" >> $GITHUB_ENV
