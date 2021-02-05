@@ -148,7 +148,7 @@ jobs:
       if: matrix.os == 'windows-latest' && env.CMAKE_ZMQ_PREFIX != ''
       shell: cmd /C CALL {0}
       run: |
-        copy /y ${{ env.CMAKE_ZMQ_PREFIX }}\bin\libzmq-mt-4*.dll /b ${{ env.CMAKE_ZMQ_PREFIX }}\bin\libzmq.dll
+        copy /y ${{ env.CMAKE_ZMQ_PREFIX }}\bin\libzmq-*.dll /b ${{ env.CMAKE_ZMQ_PREFIX }}\bin\libzmq.dll
     - name: Build the CZMQ package (WINDOWS)
       if: matrix.os == 'windows-latest'
       run: |
