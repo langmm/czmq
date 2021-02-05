@@ -171,8 +171,8 @@ jobs:
         cd ..
     - name: Run the tests (WINDOWS)
       if: matrix.os == 'windows-latest'
+      shell: cmd /C CALL {0}
       run: |
-        echo $PATH
         cd build
         ctest -C ${{ env.CONFIGURATION }} -V
         cd ..
