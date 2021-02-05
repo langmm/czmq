@@ -146,10 +146,11 @@ jobs:
         ./configure
     - name: Copy the ZeroMQ dll to standard location
       if: matrix.os == 'windows-latest' && env.CMAKE_ZMQ_PREFIX != ''
-      shell: cmd /C CALL {0}
       run: |
-        dir ${{ env.CMAKE_ZMQ_PREFIX }}\bin
-        copy /y ${{ env.CMAKE_ZMQ_PREFIX }}\bin\libzmq-*.dll /b ${{ env.CMAKE_ZMQ_PREFIX }}\bin\libzmq.dll
+        ls ${{ env.CMAKE_ZMQ_PREFIX }}
+        ls ${{ env.CMAKE_ZMQ_PREFIX }}\bin
+        cp ${{ env.CMAKE_ZMQ_PREFIX }}\bin\libzmq-*.dll ${{ env.CMAKE_ZMQ_PREFIX }}\bin\libzmq.dll
+        # copy /y ${{ env.CMAKE_ZMQ_PREFIX }}\bin\libzmq-*.dll /b ${{ env.CMAKE_ZMQ_PREFIX }}\bin\libzmq.dll
     - name: Build the CZMQ package (WINDOWS)
       if: matrix.os == 'windows-latest'
       run: |
