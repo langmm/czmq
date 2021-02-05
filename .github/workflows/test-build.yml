@@ -165,9 +165,10 @@ jobs:
     - name: Run dumpbin
       if: matrix.os == 'windows-latest'
       continue-on-error: true
+      shell: cmd /C CALL {0}
       run: |
         cd build
-        dumpbin.exe ${{ env.CONFIGURATION }}/czmq_selftest.exe
+        dumpbin.exe /DEPENDENTS ${{ env.CONFIGURATION }}/czmq_selftest.exe
         cd ..
     - name: Run the tests (WINDOWS)
       if: matrix.os == 'windows-latest'
