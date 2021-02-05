@@ -167,7 +167,7 @@ jobs:
       run: |
         echo $PATH
         cd build
-        dumpbin.exe /DEPENDENTS ${{ env.CONFIGURATION }}/czmq_selftest.exe
+        # dumpbin.exe /DEPENDENTS ${{ env.CONFIGURATION }}/czmq_selftest.exe
         ctest -C ${{ env.CONFIGURATION }} -V
     # - name: Start SSH session
     #   uses: luchihoratiu/debug-via-ssh@main
