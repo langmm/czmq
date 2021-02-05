@@ -156,11 +156,11 @@ jobs:
         make check-verbose
     - name: Add the zmq library to the path
       if: env.CMAKE_ZMQ_PREFIX != '' && matrix.os == 'windows-latest'
-      run: echo "$CMAKE_ZMQ_PREFIX/bin" >> $GITHUB_PATH
+      run: echo "${{ env.CMAKE_ZMQ_PREFIX }}/bin" >> $GITHUB_PATH
       # run: echo "PATH=$PATH:$CMAKE_ZMQ_PREFIX/bin" >> $GITHUB_ENV
     - name: Add the czmq library to the path
       if: env.CMAKE_CZMQ_PREFIX != '' && matrix.os == 'windows-latest'
-      run: echo "$CMAKE_CZMQ_PREFIX/bin" >> $GITHUB_PATH
+      run: echo "${{ env.CMAKE_CZMQ_PREFIX }}/bin" >> $GITHUB_PATH
       # run: echo "PATH=$PATH:$CMAKE_CZMQ_PREFIX/bin" >> $GITHUB_ENV
     - name: Run the tests (WINDOWS)
       if: matrix.os == 'windows-latest'
