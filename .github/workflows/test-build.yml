@@ -59,10 +59,10 @@ jobs:
       if: matrix.install-method == 'conda'
       run: conda list
     - name: Set prefix for conda package
-      if: matrix.install-method == 'conda'
+      if: matrix.install-method == 'conda' && matrix.os == 'windows-latest'
       run: |
-        echo "CMAKE_ZMQ_PREFIX=$CONDA_PREFIX" >> $GITHUB_ENV
-        echo "CMAKE_CZMQ_PREFIX=$CONDA_PREFIX" >> $GITHUB_ENV
+        echo "CMAKE_ZMQ_PREFIX=$CONDA_PREFIX\Library" >> $GITHUB_ENV
+        echo "CMAKE_CZMQ_PREFIX=$CONDA_PREFIX\Library" >> $GITHUB_ENV
     # - name: Set environment variable pointing to the conda library directory (OSX)
     #   if: matrix.os == 'macos-latest'
     #   run: echo "LDFLAGS=\"-Wl,-rpath,$CONDA_PREFIX/lib $LDFLAGS\"" >> $GITHUB_ENV
@@ -151,9 +151,7 @@ jobs:
         echo "%CMAKE_ZMQ_PREFIX%"
         dir "%CMAKE_ZMQ_PREFIX%"
         dir "%CMAKE_ZMQ_PREFIX%\bin"
-        dir "%CMAKE_ZMQ_PREFIX%\Library\bin"
-        dir "%CMAKE_ZMQ_PREFIX%\Library"
-    # copy /y "%CMAKE_ZMQ_PREFIX%\bin\libzmq-*.dll" /b "%CMAKE_ZMQ_PREFIX%\bin\libzmq.dll"
+        copy /y "%CMAKE_ZMQ_PREFIX%\bin\libzmq-*.dll" /b "%CMAKE_ZMQ_PREFIX%\bin\libzmq.dll"
     - name: Build the CZMQ package (WINDOWS)
       if: matrix.os == 'windows-latest'
       run: |
