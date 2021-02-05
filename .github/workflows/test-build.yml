@@ -33,7 +33,8 @@ jobs:
     - name: Apply patch to cmake
       if: matrix.install-method != 'manager'
       run: |
-        git apply 0001-cmake-libzmq-to-zeromq.patch
+        # git apply 0001-cmake-libzmq-to-zeromq.patch
+        git apply 0001-cmake-libzmq-to-zeromq-vcpkg.patch
     - name: Apply patch to cmake
       if: matrix.install-method == 'manager'
       run: |
