@@ -155,6 +155,7 @@ jobs:
 
     - name: Build the CZMQ package (WINDOWS)
       if: matrix.os == 'windows-latest'
+      shell: cmd /C CALL {0}
       run: |
         mkdir build
         cd build
