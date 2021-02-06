@@ -152,12 +152,13 @@ jobs:
         dir "%CMAKE_ZMQ_PREFIX%"
         dir "%CMAKE_ZMQ_PREFIX%\bin"
         copy /y "%CMAKE_ZMQ_PREFIX%\bin\libzmq-*.dll" /b "%CMAKE_ZMQ_PREFIX%\bin\libzmq.dll"
+
     - name: Build the CZMQ package (WINDOWS)
       if: matrix.os == 'windows-latest'
       run: |
         mkdir build
         cd build
-        cmake .. -DCZMQ_BUILD_SHARED=ON -DCZMQ_BUILD_STATIC=OFF $CMAKE_FLAGS -A "x64"
+        cmake .. -DCZMQ_BUILD_SHARED=ON -DCZMQ_BUILD_STATIC=OFF $CMAKE_FLAGS -Ax64
         cmake --build . --config ${{ env.CONFIGURATION }} --target install
     - name: Run the tests (OSX/LINUX)
       if: matrix.os != 'windows-latest'
