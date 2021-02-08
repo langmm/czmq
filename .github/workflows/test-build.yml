@@ -159,7 +159,7 @@ jobs:
       run: |
         mkdir build
         cd build
-        cmake .. -DCZMQ_BUILD_SHARED=ON -DCZMQ_BUILD_STATIC=OFF $CMAKE_FLAGS -Ax64
+        cmake .. -DCZMQ_BUILD_SHARED=ON -DCZMQ_BUILD_STATIC=OFF ${{ env.CMAKE_FLAGS }} -Ax64
         cmake --build . --config ${{ env.CONFIGURATION }} --target install
     - name: Run the tests (OSX/LINUX)
       if: matrix.os != 'windows-latest'
