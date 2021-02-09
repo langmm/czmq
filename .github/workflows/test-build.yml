@@ -180,9 +180,13 @@ jobs:
         cd build
         dumpbin.exe /DEPENDENTS ${{ env.CONFIGURATION }}/czmq_selftest.exe
         where libczmq.dll
+        dumpbin.exe /DEPENDENTS ${{ env.CONFIGURATION }}/libczmq.dll
         where VCRUNTIME140D.dll
+        dumpbin.exe /DEPENDENTS C:\Windows\System32\vcruntime140d.dll
         where ucrtbased.dll
+        dumpbin.exe /DEPENDENTS C:\Windows\System32\ucrtbased.dll
         where KERNEL32.dll
+        dumpbin.exe /DEPENDENTS C:\Windows\System32\KERNEL32.dll
         cd ..
     - name: Run the tests (WINDOWS)
       if: matrix.os == 'windows-latest'
