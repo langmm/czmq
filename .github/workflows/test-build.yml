@@ -107,8 +107,8 @@ jobs:
     - name: Set prefix for Github package
       if: matrix.os == 'windows-latest' && matrix.install-method == 'github'
       run: |
-        echo "CMAKE_ZMQ_PREFIX=C:\libzmq" >> $GITHUB_ENV
-        echo "CMAKE_CZMQ_PREFIX=C:\czmq" >> $GITHUB_ENV
+        echo "CMAKE_ZMQ_PREFIX=C:/libzmq" >> $GITHUB_ENV
+        echo "CMAKE_CZMQ_PREFIX=C:/czmq" >> $GITHUB_ENV
     - name: Build and install zeromq master branch (WINDOWS)
       if: matrix.os == 'windows-latest' && matrix.install-method == 'github'
       run: |
