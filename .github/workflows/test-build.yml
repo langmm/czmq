@@ -180,11 +180,8 @@ jobs:
         cd build
         where libzmq-v142-mt-gd-4_3_5.dll
         dumpbin.exe /DEPENDENTS C:\libzmq\bin\libzmq-v142-mt-gd-4_3_5.dll
-        where IPHLPAPI.DLL
-        where ADVAPI32.dll
-        where MSVCP140D.dll
-        where VCRUNTIME140_1D.dll
         cd ..
+        echo %PATH%
      # dumpbin.exe /DEPENDENTS ${{ env.CONFIGURATION }}/czmq_selftest.exe
      # where libczmq.dll
      # dumpbin.exe /DEPENDENTS ${{ env.CONFIGURATION }}/libczmq.dll
@@ -194,6 +191,10 @@ jobs:
      # dumpbin.exe /DEPENDENTS C:\Windows\System32\ucrtbased.dll
      # where KERNEL32.dll
      # dumpbin.exe /DEPENDENTS C:\Windows\System32\KERNEL32.dll
+     # where IPHLPAPI.DLL
+     # where ADVAPI32.dll
+     # where MSVCP140D.dll
+     # where VCRUNTIME140_1D.dll
     - name: Run the tests (WINDOWS)
       if: matrix.os == 'windows-latest'
       shell: cmd /C CALL {0}
