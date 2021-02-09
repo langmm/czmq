@@ -182,6 +182,11 @@ jobs:
         dir "%CMAKE_CZMQ_PREFIX%\bin"
         copy /y "%CMAKE_ZMQ_PREFIX%\bin\libzmq-*.dll" /b "%CMAKE_CZMQ_PREFIX%\bin\"
         dir "%CMAKE_CZMQ_PREFIX%\bin"
+    - name: Add the zmq library to the path
+      if: matrix.os == 'windows-latest' && matrix.install-method == 'github'
+      run: |
+        echo "C:\czmq\bin" >> $GITHUB_PATH
+        echo "C:\libzmq\bin" >> $GITHUB_PATH
     - name: Run dumpbin
       if: matrix.os == 'windows-latest' && matrix.install-method == 'github'
       shell: cmd /C CALL {0}
