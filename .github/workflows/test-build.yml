@@ -180,6 +180,10 @@ jobs:
         cd build
         where libzmq-v142-mt-gd-4_3_5.dll
         dumpbin.exe /DEPENDENTS C:\libzmq\bin\libzmq-v142-mt-gd-4_3_5.dll
+        where IPHLPAPI.DLL
+        where ADVAPI32.dll
+        where MSVCP140D.dll
+        where VCRUNTIME140_1D.dll
         cd ..
      # dumpbin.exe /DEPENDENTS ${{ env.CONFIGURATION }}/czmq_selftest.exe
      # where libczmq.dll
