@@ -178,15 +178,23 @@ jobs:
       shell: cmd /C CALL {0}
       run: |
         cd build
-        dumpbin.exe /DEPENDENTS ${{ env.CONFIGURATION }}/czmq_selftest.exe
-        where libczmq.dll
-        dumpbin.exe /DEPENDENTS ${{ env.CONFIGURATION }}/libczmq.dll
-        where VCRUNTIME140D.dll
-        dumpbin.exe /DEPENDENTS C:\Windows\System32\vcruntime140d.dll
-        where ucrtbased.dll
-        dumpbin.exe /DEPENDENTS C:\Windows\System32\ucrtbased.dll
-        where KERNEL32.dll
-        dumpbin.exe /DEPENDENTS C:\Windows\System32\KERNEL32.dll
+        # dumpbin.exe /DEPENDENTS ${{ env.CONFIGURATION }}/czmq_selftest.exe
+        # where libczmq.dll
+        # dumpbin.exe /DEPENDENTS ${{ env.CONFIGURATION }}/libczmq.dll
+        # where VCRUNTIME140D.dll
+        # dumpbin.exe /DEPENDENTS C:\Windows\System32\vcruntime140d.dll
+        # where ucrtbased.dll
+        # dumpbin.exe /DEPENDENTS C:\Windows\System32\ucrtbased.dll
+        # where KERNEL32.dll
+        # dumpbin.exe /DEPENDENTS C:\Windows\System32\KERNEL32.dll
+        where libzmq-v142-mt-gd-4_3_5.dll
+        where api-ms-win-core-errorhandling-l1-1-0.dll
+        where ntdll.dll
+        where KERNELBASE.dll
+        where WS2_32.dll
+        where RPCRT4.dll
+        where IPHLPAPI.DLL
+        where USER32.dll
         cd ..
     - name: Run the tests (WINDOWS)
       if: matrix.os == 'windows-latest'
