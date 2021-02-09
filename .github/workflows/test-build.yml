@@ -195,7 +195,7 @@ jobs:
      # where ADVAPI32.dll
      # where MSVCP140D.dll
      # where VCRUNTIME140_1D.dll
-     - name: Run the tests (WINDOWS)
+    - name: Run the tests (WINDOWS)
       if: matrix.os == 'windows-latest'
       shell: cmd /C CALL {0}
       run: |
