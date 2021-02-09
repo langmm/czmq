@@ -180,7 +180,7 @@ jobs:
         echo "%CMAKE_CZMQ_PREFIX%"
         dir "%CMAKE_CZMQ_PREFIX%"
         dir "%CMAKE_CZMQ_PREFIX%\bin"
-        copy /y "%CMAKE_ZMQ_PREFIX%\bin\libzmq-*.dll" /b "%CMAKE_CZMQ_PREFIX%\bin\libzmq.dll"
+        copy /y "%CMAKE_ZMQ_PREFIX%\bin\libzmq-*.dll" /b "%CMAKE_CZMQ_PREFIX%\bin\"
         dir "%CMAKE_CZMQ_PREFIX%\bin"
     - name: Run dumpbin
       if: matrix.os == 'windows-latest' && matrix.install-method == 'github'
