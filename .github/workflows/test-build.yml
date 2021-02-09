@@ -173,6 +173,15 @@ jobs:
       if: env.CMAKE_CZMQ_PREFIX != '' && matrix.os == 'windows-latest'
       run: echo "${{ env.CMAKE_CZMQ_PREFIX }}/bin" >> $GITHUB_PATH
       # run: echo "PATH=$PATH:$CMAKE_CZMQ_PREFIX/bin" >> $GITHUB_ENV
+    - name: Copy the ZeroMQ dll to standard location
+      if: matrix.os == 'windows-latest' && env.CMAKE_ZMQ_PREFIX != '' && env.CMAKE_CZMQ_PREFIX
+      shell: cmd /C CALL {0}
+      run: |
+        echo "%CMAKE_CZMQ_PREFIX%"
+        dir "%CMAKE_CZMQ_PREFIX%"
+        dir "%CMAKE_CZMQ_PREFIX%\bin"
+        copy /y "%CMAKE_ZMQ_PREFIX%\bin\libzmq-*.dll" /b "%CMAKE_CZMQ_PREFIX%\bin\libzmq.dll"
+        dir "%CMAKE_CZMQ_PREFIX%\bin"
     - name: Run dumpbin
       if: matrix.os == 'windows-latest' && matrix.install-method == 'github'
       shell: cmd /C CALL {0}
